@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lady</title>
+    <link rel="icon" href="LogoLadyP.png" type="image/png">
+    <link rel="stylesheet" href="./yes_style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Comic+Neue:wght@400;700&display=swap" rel="stylesheet">
+
+<script>
+    
+document.addEventListener('DOMContentLoaded', function() {
+    
+    const heartsContainer = document.querySelector('.floating-hearts');
+    const heartCount = 15;
+    
+    for (let i = 0; i < heartCount; i++) {
+        createHeart(heartsContainer);
+    }
+    
+    function createHeart(container) {
+        const heart = document.createElement('div');
+        heart.className = 'heart';
+        heart.innerHTML = '❤️';
+        
+        heart.style.left = Math.random() * 100 + '%';
+        heart.style.top = Math.random() * 100 + '%';
+        heart.style.fontSize = (0.5 + Math.random() * 1.5) + 'em';
+        heart.style.animationDuration = (3 + Math.random() * 4) + 's';
+        heart.style.animationDelay = Math.random() * 5 + 's';
+        heart.style.opacity = 0.3 + Math.random() * 0.7;
+        
+        container.appendChild(heart);
+    }
+    
+    
+    const kissBtn = document.querySelector('.kiss-button');
+    kissBtn.addEventListener('click', function() {
+        for (let i = 0; i < 10; i++) {
+            setTimeout(() => {
+                createFlyingKiss();
+            }, i * 200);
+        }
+    });
+    
+    function createFlyingKiss() {
+        const kiss = document.createElement('div');
+        kiss.innerHTML = '😘';
+        kiss.style.position = 'absolute';
+        kiss.style.fontSize = '2em';
+        kiss.style.zIndex = '10';
+        kiss.style.animation = 'flyKiss 2s linear forwards';
+        document.body.appendChild(kiss);
+        
+        
+        kiss.style.left = (10 + Math.random() * 80) + '%';
+        kiss.style.bottom = '10%';
+        
+        
+        const endLeft = (10 + Math.random() * 80) + '%';
+        
+        
+        const animation = document.createElement('style');
+        animation.innerHTML = `
+            @keyframes flyKiss {
+                0% { transform: translate(0, 0) scale(1); opacity: 1; }
+                100% { transform: translate(${endLeft}, -100vh) scale(0.5); opacity: 0; }
+            }
+        `;
+        document.head.appendChild(animation);
+        
+        
+        setTimeout(() => {
+            kiss.remove();
+            animation.remove();
+        }, 2000);
+    }
+});
+
+</script>
+</head>
+<body>
+    <div class="floating-hearts"></div>
+    
+    <div class="container">
+        <h1 class="header_text">YES ! T'as craqué pour moi ! ❤️</h1>
+        <div class="subtext">Bon ok, j'avoue... moi aussi je t'aime grave</div>
+        
+        <div class="gif_container">
+            <img src="https://media4.giphy.com/media/v1.Y2lkPTc5MGI3NjExY2p6bnI2NzNmeHR5OWVmazFoNzk1bnZpMDkzNHhsbGNsdTlwdDAweCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/Y8Q9JqNbck5bxjmxZa/giphy.gif" alt="Oursons amoureux">
+        </div>
+        
+        <div class="buttons">
+            <button class="kiss-button">Bisou</button>
+        </div>
+    </div>
+
+</body>
+</html>
